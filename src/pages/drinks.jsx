@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 class drinks extends React.Component {
   render() {

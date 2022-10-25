@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 
 describe('Testes do projeto trybeWallet', () => {
   it('teste botao drinks', () => {
