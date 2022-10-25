@@ -18,23 +18,19 @@ function App() {
     <AppProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/meals" component={ Meals } />
-        <Route path="/drinks" component={ Drinks } />
+        <Route exact path="/meals" component={ Meals } />
+        <Route exact path="/drinks" component={ Drinks } />
+        <Route exact path="/meals/:id" component={ MealsId } />
+        <Route exact path="/drinks/:id" component={ DrinksId } />
         <Route
-          path="/meals/:id-da-receita"
-          render={ (props) => <MealsId { ...props } /> }
+          exact
+          path="/meals/:id/in-progress"
+          component={ MealsIdProgress }
         />
         <Route
-          path="/drinks/:id-da-receita"
-          render={ (props) => <Drinks { ...props } /> }
-        />
-        <Route
-          path="/meals/:id-da-receita/in-progress"
-          render={ (props) => <MealsIdProgress { ...props } /> }
-        />
-        <Route
-          path="/drinks/:id-da-receita/in-progress"
-          render={ (props) => <DrinksIdProgress { ...props } /> }
+          exact
+          path="/drinks/:id/in-progress"
+          component={ DrinksIdProgress }
         />
         <Route path="/profile" component={ Profile } />
         <Route path="/done-recipes" component={ DoneRecipes } />

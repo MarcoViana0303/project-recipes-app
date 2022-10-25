@@ -9,9 +9,9 @@ function Drinksid() {
 
   const titlePage = () => {
     if (Object.keys(showParams).length === 0) {
-      setShowIdTitle(false);
-    } else {
       setShowIdTitle(true);
+    } else {
+      setShowIdTitle(false);
     }
   };
 
