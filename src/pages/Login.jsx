@@ -25,36 +25,38 @@ function Login({ history }) {
   }, [email, password]);
 
   return (
-    <form>
-      <label htmlFor="email">
-        <input
-          type="email"
-          data-testid="email-input"
-          id="email"
-          placeholder="E-mail"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
-      </label>
-      <label htmlFor="password">
-        <input
-          type="password"
-          data-testid="password-input"
-          id="password"
-          placeholder="Senha"
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
-      </label>
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        disabled={ isButtonDisabled }
-        onClick={ handleClick }
-      >
-        Enter
-      </button>
-    </form>
+    <div>
+      <form>
+        <label htmlFor="email">
+          <input
+            type="email"
+            data-testid="email-input"
+            id="email"
+            placeholder="E-mail"
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
+        </label>
+        <label htmlFor="password">
+          <input
+            type="password"
+            data-testid="password-input"
+            id="password"
+            placeholder="Senha"
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
+          />
+        </label>
+        <button
+          type="submit"
+          data-testid="login-submit-btn"
+          disabled={ isButtonDisabled }
+          onClick={ handleClick }
+        >
+          Enter
+        </button>
+      </form>
+    </div>
   );
 }
 
