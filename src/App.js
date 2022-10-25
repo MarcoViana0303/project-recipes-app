@@ -9,7 +9,7 @@ import melsId from './pages/mealsId';
 import drinksId from './pages/drinksId';
 import mealsIdProgress from './pages/mealsIdProgress';
 import drinksIdProgress from './pages/drinksIdProgress';
-import profile from './pages/profile';
+import profile from './pages/Profile';
 import doneRecipes from './pages/doneRecipes';
 import favoriteRecipes from './pages/favoriteRecipes.';
 

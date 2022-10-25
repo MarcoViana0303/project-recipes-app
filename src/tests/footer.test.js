@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import Footer from '../components/Footer';
 
-describe('Testes do projeto trybeWallet', () => {
+describe('Teste do componente Footer', () => {
   it('teste botao drinks', () => {
     const { history } = renderWithRouter(<Footer />);
     const button = screen.getByTestId('drinks-bottom-btn');
