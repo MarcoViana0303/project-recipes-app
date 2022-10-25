@@ -7,6 +7,7 @@ function Header() {
   const location = useLocation();
   const [isRender, setIsRender] = useState(true);
   const [title, setTitle] = useState('');
+  const [showSearchInput, setShowSearchInput] = useState('');
 
   const pathTitle = () => {
     switch (location.pathname) {
@@ -40,6 +41,10 @@ function Header() {
     pathTitle();
   }, []);
 
+  const handleShowInput = () => {
+    console.log('teste');
+  };
+
   /* if (location.pathname === '/meals') {
     setIsRender(false);
     console.log(isRender);
@@ -55,11 +60,16 @@ function Header() {
         />
       </a>
       {
-        isRender
-        && (
-          <a href="/">
-            <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
-          </a>)
+        isRender && (
+          
+            <button><img 
+            src={ searchIcon } 
+            alt="search" data-testid="search-top-btn" 
+            onClick={ () => handleShowInput() /></button>
+            {/* <img src={ searchIcon } alt="search" data-testid="search-top-btn" /> */}
+            {showSearchInput && <input type="text" />}
+          </div>
+        )
       }
 
       <h1 data-testid="page-title">{title}</h1>
