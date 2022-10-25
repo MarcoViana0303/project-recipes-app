@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
-  handleClick = () => {
+  const handleClick = () => {
     localStorage.clear();
   };
 

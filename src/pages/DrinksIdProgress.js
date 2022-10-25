@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Drinksid() {
+function DrinksIdProgress() {
   const [showIdTitle, setShowIdTitle] = useState(false);
   const showParams = useParams();
 
@@ -18,7 +18,6 @@ function Drinksid() {
   useEffect(() => {
     titlePage();
     console.log(Object.keys(showParams).length);
-    console.log(showParams);
   }, []);
 
   return (
@@ -29,4 +28,4 @@ function Drinksid() {
   );
 }
 
-export default Drinksid;
+export default DrinksIdProgress;

@@ -7,7 +7,6 @@ function Header() {
   const location = useLocation();
   const [isRender, setIsRender] = useState(true);
   const [title, setTitle] = useState('');
-  // console.log(caminho);
 
   const pathTitle = () => {
     switch (location.pathname) {
