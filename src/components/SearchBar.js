@@ -3,8 +3,7 @@ import { useLocation } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 function SearchBar() {
-  const { dataDrinks, dataMeals,
-    requestDrinksAPI, requestMealsAPI, searchInput } = useContext(AppContext);
+  const { requestDrinksAPI, requestMealsAPI, searchInput } = useContext(AppContext);
 
   const [radioButton, setradioButton] = useState('');
 

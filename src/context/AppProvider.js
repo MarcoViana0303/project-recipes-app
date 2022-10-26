@@ -10,7 +10,6 @@ function AppProvider({ children }) {
   const [searchInput, setSearchInput] = useState({});
 
   const requestMealsAPI = async (type, endPoint, filter) => {
-    console.log(`https://www.themealdb.com/api/json/v1/1/filter.php?${type}=${endPoint}`);
     const request = await fetch(
       `https://www.themealdb.com/api/json/v1/1/${filter}.php?${type}=${endPoint}`,
     );
@@ -19,7 +18,7 @@ function AppProvider({ children }) {
     console.log(response);
   };
 
-  async function requestDrinksAPI(type, endPoint) {
+  async function requestDrinksAPI(type, endPoint, filter) {
     const request = await fetch(
       `https://www.thecocktaildb.com/api/json/v1/1/${filter}.php?${type}=${endPoint}`,
     );
