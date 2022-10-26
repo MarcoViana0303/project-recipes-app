@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header() {
   const location = useLocation();
@@ -52,6 +53,7 @@ function Header() {
 
   return (
     <div>
+      <SearchBar />
       <a href="/profile">
         <img
           src={ profileIcon }
