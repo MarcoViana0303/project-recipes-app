@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AppProvider from './context/appProvider';
+import AppProvider from './context/AppProvider';
 import './App.css';
 import Login from './pages/Login';
 import Meals from './pages/Meals';
