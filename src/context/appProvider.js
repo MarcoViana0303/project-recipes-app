@@ -5,13 +5,19 @@ import AppContext from './appContext';
 function AppProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [mealList, setMealList] = useState([]);
+  const [drinksList, setDrinksList] = useState([]);
 
   const contexto = useMemo(() => ({
     email,
     password,
     setPassword,
     setEmail,
-  }), [email, password]);
+    mealList,
+    setMealList,
+    drinksList,
+    setDrinksList,
+  }), [email, password, mealList, drinksList]);
 
   return (
     <AppContext.Provider value={ contexto }>{children}</AppContext.Provider>
