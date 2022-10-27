@@ -21,7 +21,7 @@ describe('Teste do componente Recipes', () => {
     userEvent.type(emailInput, EMAIL_SAMPLE);
     userEvent.type(passwordInput, PASSWORD_SAMPLE);
     userEvent.click(buttonInput);
-    const button = await screen.getByTestId('Beef-category-filter');
+    const button = await screen.findByTestId('Beef-category-filter');
     expect(button).toBeInTheDocument();
     userEvent.click(button);
     // const card = screen.getByTestId('0-card-img');
