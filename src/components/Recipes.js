@@ -33,7 +33,7 @@ function Recipes() {
     };
     getCategories();
     return () => setButtonsList([]);
-  }, [drinksList]);
+  }, []);
 
   useEffect(() => {
     const getDrinksList = async () => {
@@ -44,6 +44,8 @@ function Recipes() {
     getDrinksList();
   }, [setDrinksList]);
 
+  console.log(mealList);
+
   return (
     <div>
       {renderMeals ? (
@@ -53,7 +55,12 @@ function Recipes() {
             if (i <= MAX_RENDER) {
               return (
                 <section key={ meal.idMeal } data-testid={ `${i}-recipe-card` }>
-                  <Card thumb={ meal.strMealThumb } str={ meal.strMeal } index={ i } />
+                  <Card
+                    thumb={ meal.strMealThumb }
+                    str={ meal.strMeal }
+                    index={ i }
+                    idMeal={ meal.idDrink }
+                  />
                 </section>
               );
             }
@@ -71,6 +78,7 @@ function Recipes() {
                     thumb={ drink.strDrinkThumb }
                     str={ drink.strDrink }
                     index={ i }
+                    idMeal={ drink.idDrink }
                   />
                 </section>
               );
