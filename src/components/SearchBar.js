@@ -34,30 +34,39 @@ function SearchBar() {
   return (
     <form>
       <div>
-        <input
-          type="radio"
-          value="i"
-          name="search"
-          data-testid="ingredient-search-radio"
-          onChange={ ({ target }) => setradioButton(target.value) }
-        />
-        ingrediente
-        <input
-          type="radio"
-          value="s"
-          name="search"
-          data-testid="name-search-radio"
-          onChange={ ({ target }) => setradioButton(target.value) }
-        />
-        nome
-        <input
-          type="radio"
-          value="f"
-          name="search"
-          data-testid="first-letter-search-radio"
-          onChange={ ({ target }) => setradioButton(target.value) }
-        />
-        primeira letra
+        <label htmlFor="ingrediente">
+          <input
+            type="radio"
+            value="i"
+            id="ingrediente"
+            name="search"
+            data-testid="ingredient-search-radio"
+            onChange={ ({ target }) => setradioButton(target.value) }
+          />
+          ingrediente
+        </label>
+        <label htmlFor="nome">
+          <input
+            type="radio"
+            id="nome"
+            value="s"
+            name="search"
+            data-testid="name-search-radio"
+            onChange={ ({ target }) => setradioButton(target.value) }
+          />
+          nome
+        </label>
+        <label htmlFor="letter">
+          <input
+            type="radio"
+            value="f"
+            id="letter"
+            name="search"
+            data-testid="first-letter-search-radio"
+            onChange={ ({ target }) => setradioButton(target.value) }
+          />
+          primeira letra
+        </label>
       </div>
       <button type="button" data-testid="exec-search-btn" onClick={ handleClick }>
         Pesquisar

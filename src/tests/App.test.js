@@ -3,11 +3,9 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
-// import Login from '../pages/Login';
 
 const EMAIL_SAMPLE = 'nome@exemple.com';
 const PASSWORD_SAMPLE = '1234567';
-
 const INPUT_EMAIL = 'email-input';
 const INPUT_PASSWORD = 'password-input';
 const INPUT_BUTTON = 'login-submit-btn';
