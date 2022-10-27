@@ -1,45 +1,36 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Buttons from '../components/Buttons';
-import Card from '../components/Card';
-import AppContext from '../context/appContext';
+// import Buttons from '../components/Buttons';
+// import Card from '../components/Card';
+// import AppContext from '../context/appContext';
+import Recipes from '../components/Recipes';
 
-const MAX_RENDER = 11;
+// const MAX_RENDER = 11;
 
 export default function Meals() {
-  const { mealList, setMealList } = useContext(AppContext);
-  const [buttonsList, setButtonsList] = useState([]);
+  // const { mealList, setMealList } = useContext(AppContext);
+  // const [buttonsList, setButtonsList] = useState([]);
 
-  useEffect(() => {
-    const getMealsList = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      const { meals } = await fetch(endpoint).then((response) => response.json());
-      setMealList(meals);
-    };
-    const getCategories = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-      const { meals } = await fetch(endpoint).then((response) => response.json());
-      setButtonsList(meals);
-    };
-    getMealsList();
-    getCategories();
-  }, [setMealList]);
+  // useEffect(() => {
+  //   const getMealsList = async () => {
+  //     const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  //     const { meals } = await fetch(endpoint).then((response) => response.json());
+  //     setMealList(meals);
+  //   };
+  //   const getCategories = async () => {
+  //     const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  //     const { meals } = await fetch(endpoint).then((response) => response.json());
+  //     setButtonsList(meals);
+  //   };
+  //   getMealsList();
+  //   getCategories();
+  // }, []);
 
   return (
     <div>
       <Header />
-      <Buttons categories={ buttonsList } type="meals" />
-      {mealList.map((meal, i) => {
-        if (i <= MAX_RENDER) {
-          return (
-            <section key={ meal.idMeal } data-testid={ `${i}-recipe-card` }>
-              <Card thumb={ meal.strMealThumb } str={ meal.strMeal } index={ i } />
-            </section>
-          );
-        }
-        return (null);
-      })}
+      <Recipes />
       <Footer />
 
     </div>
