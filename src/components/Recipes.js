@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Buttons from './Buttons';
 import Card from './Card';
-import AppContext from '../context/appContext';
+import AppContext from '../context/AppContext';
 
 const MAX_RENDER = 11;
 
