@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import AppContext from '../context/AppContext';
 
 function Header() {
+  const { setSearchInput } = useContext(AppContext);
+
+  // console.log(useContext, 'header');
+
   const location = useLocation();
   const [isRender, setIsRender] = useState(true);
   const [title, setTitle] = useState('');
@@ -33,9 +38,11 @@ function Header() {
   };
 
   useEffect(() => {
-    if (location.pathname === '/profile'
+    if (
+      location.pathname === '/profile'
       || location.pathname === '/done-recipes'
-      || location.pathname === '/favorite-recipes') {
+      || location.pathname === '/favorite-recipes'
+    ) {
       setIsRender(false);
       console.log(isRender);
     }
@@ -55,24 +62,22 @@ function Header() {
     <div>
       <SearchBar />
       <a href="/profile">
-        <img
-          src={ profileIcon }
-          alt="profile"
-          data-testid="profile-top-btn"
-        />
+        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
       </a>
       <div>
-        { isRender && (
+        {isRender && (
           <button type="button" onClick={ handleShowInput }>
-            <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="search"
-            />
-          </button>)}
-
+            <img data-testid="search-top-btn" src={ searchIcon } alt="search" />
+          </button>
+        )}
       </div>
-      {showSearchInput && <input type="text" data-testid="search-input" />}
+      {showSearchInput && (
+        <input
+          type="text"
+          data-testid="search-input"
+          onChange={ ({ target }) => setSearchInput(target.value) }
+        />
+      )}
       {/* <img src={ searchIcon } alt="search" data-testid="search-top-btn" /> */}
 
       <h1 data-testid="page-title">{title}</h1>

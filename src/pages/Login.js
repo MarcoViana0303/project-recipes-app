@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import AppContext from '../context/appContext';
+import AppContext from '../context/AppContext';
 
 function Login({ history }) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
