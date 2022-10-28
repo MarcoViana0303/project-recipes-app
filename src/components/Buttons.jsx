@@ -68,8 +68,6 @@ export default function Buttons({ categories, type }) {
     }
     setFilteredButton('');
   };
-  console.log(categories);
-
   return (
     <section>
       <button

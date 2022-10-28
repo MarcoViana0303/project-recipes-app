@@ -44,8 +44,6 @@ function Recipes() {
     getDrinksList();
   }, [setDrinksList]);
 
-  console.log(mealList);
-
   return (
     <div>
       {renderMeals ? (
@@ -59,7 +57,7 @@ function Recipes() {
                     thumb={ meal.strMealThumb }
                     str={ meal.strMeal }
                     index={ i }
-                    idMeal={ meal.idDrink }
+                    idMeal={ meal.idMeal }
                   />
                 </section>
               );

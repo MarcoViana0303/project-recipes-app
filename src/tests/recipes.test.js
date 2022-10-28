@@ -21,10 +21,21 @@ describe('Teste do componente Recipes', () => {
     userEvent.type(emailInput, EMAIL_SAMPLE);
     userEvent.type(passwordInput, PASSWORD_SAMPLE);
     userEvent.click(buttonInput);
-    const button = await screen.findByTestId('Beef-category-filter');
-    expect(button).toBeInTheDocument();
-    userEvent.click(button);
-    // const card = screen.getByTestId('0-card-img');
-    // expect(card).toBeInTheDocument();
+    const buttonBeef = await screen.findByTestId('Beef-category-filter');
+    expect(buttonBeef).toBeInTheDocument();
+
+    userEvent.click(buttonBeef);
+
+    const card = await screen.findByTestId('0-card-img');
+    expect(card).toBeInTheDocument();
+
+    const buttonDrinks = screen.getByTestId('drinks-bottom-btn');
+    userEvent.click(buttonDrinks);
+
+    const buttonShake = await screen.findByTestId('Shake-category-filter');
+    expect(buttonShake).toBeInTheDocument();
+    userEvent.click(buttonShake);
+    const card1 = await screen.findByTestId('1-card-img');
+    expect(card1).toBeInTheDocument();
   });
 });
