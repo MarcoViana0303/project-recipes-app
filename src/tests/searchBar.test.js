@@ -11,7 +11,39 @@ const SEARCH_INPUT = 'search-input';
 const SEARCH_EXEC = 'exec-search-btn';
 
 describe('01 - Testando o componente SearchBar da pagina meals', () => {
-  test('Verifica a URL esta sendo chamada corretamente para o imput ingredientes', () => {
+  afterEach(() => jest.clearAllMocks());
+  test('Verifica se o alert com a mensagem "Your search must have only 1 (one) character" aparece na tela', () => {
+    window.alert = jest.fn();
+
+    const { history } = renderWithRouter(<App />);
+
+    act(() => {
+      history.push('/meals');
+    });
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/meals');
+
+    const letter = screen.getByText(/primeira letra/i);
+    expect(letter).toBeInTheDocument();
+    userEvent.click(letter);
+
+    const search = screen.getByTestId(SEARCH_BTN);
+    expect(search).toBeInTheDocument();
+    userEvent.click(search);
+
+    const text = screen.getByTestId(SEARCH_INPUT);
+    expect(text).toBeInTheDocument();
+    userEvent.type(text, 'Ab');
+
+    const searchButton = screen.getByTestId(SEARCH_EXEC);
+    expect(searchButton).toBeInTheDocument();
+    userEvent.click(searchButton);
+
+    expect(window.alert).toBeCalledWith('Your search must have only 1 (one) character');
+  });
+
+  test('Verifica a URL se esta sendo chamada corretamente para o imput letter na pg meals', () => {
     const { history } = renderWithRouter(<App />);
 
     jest.spyOn(global, 'fetch');
@@ -25,17 +57,9 @@ describe('01 - Testando o componente SearchBar da pagina meals', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/meals');
 
-    const radio = screen.getByTestId(ID_INGREDENTES);
-    expect(radio).toBeInTheDocument();
-
-    const ingredientes = screen.getByText(/ingrediente/i);
-    expect(ingredientes).toBeInTheDocument();
-
-    const name = screen.getByText(/nome/i);
-    expect(name).toBeInTheDocument();
-
     const letter = screen.getByText(/primeira letra/i);
     expect(letter).toBeInTheDocument();
+    userEvent.click(letter);
 
     const search = screen.getByTestId(SEARCH_BTN);
     expect(search).toBeInTheDocument();
@@ -43,14 +67,14 @@ describe('01 - Testando o componente SearchBar da pagina meals', () => {
 
     const text = screen.getByTestId(SEARCH_INPUT);
     expect(text).toBeInTheDocument();
-    userEvent.type(text, 'Arrabiata');
+    userEvent.type(text, 'a');
 
     const searchButton = screen.getByTestId(SEARCH_EXEC);
     expect(searchButton).toBeInTheDocument();
     userEvent.click(searchButton);
 
     expect(global.fetch).toHaveBeenCalled();
-    expect(global.fetch).toBeCalledWith('https://www.themealdb.com/api/json/v1/1/search.php?=Arrabiata');
+    expect(global.fetch).toBeCalledWith('https://www.themealdb.com/api/json/v1/1/search.php?f=a');
   });
 
   test('Verifica a URL esta sendo chamada corretamente para o imput name', () => {
@@ -66,9 +90,6 @@ describe('01 - Testando o componente SearchBar da pagina meals', () => {
     });
     const { pathname } = history.location;
     expect(pathname).toBe('/meals');
-
-    const radio = screen.getByTestId(ID_INGREDENTES);
-    expect(radio).toBeInTheDocument();
 
     const name = screen.getByText(/nome/i);
     expect(name).toBeInTheDocument();
@@ -107,7 +128,7 @@ describe('01 - Testando o componente SearchBar da pagina meals', () => {
     const radio = screen.getByTestId(ID_INGREDENTES);
     expect(radio).toBeInTheDocument();
 
-    const letter = screen.getByText(/primeira letra/i);
+    const letter = screen.getByText(/ingrediente/i);
     expect(letter).toBeInTheDocument();
     userEvent.click(letter);
 
@@ -117,18 +138,21 @@ describe('01 - Testando o componente SearchBar da pagina meals', () => {
 
     const text = screen.getByTestId(SEARCH_INPUT);
     expect(text).toBeInTheDocument();
-    userEvent.type(text, 'a');
+    userEvent.type(text, 'chicken');
 
     const searchButton = screen.getByTestId(SEARCH_EXEC);
     expect(searchButton).toBeInTheDocument();
     userEvent.click(searchButton);
 
     expect(global.fetch).toHaveBeenCalled();
-    expect(global.fetch).toBeCalledWith('https://www.themealdb.com/api/json/v1/1/search.php?f=a');
+    expect(global.fetch).toBeCalledWith('https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken');
   });
 });
 
-describe('01 - Testando o componente SearchBar da pagina Drinks', () => {
+describe('02 - Testando o componente SearchBar da pagina Drinks', () => {
+  afterEach(() => jest.clearAllMocks());
+  // beforeEach(cleanup);
+
   test('Verifica a URL esta sendo chamada corretamente para o imput primeira letra da página drink', () => {
     const { history } = renderWithRouter(<App />);
 

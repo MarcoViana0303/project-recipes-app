@@ -15,7 +15,6 @@ function AppProvider({ children }) {
     );
     const response = await request.json();
     setDataMeals(response);
-    console.log(response);
   };
 
   async function requestDrinksAPI(type, endPoint, filter) {

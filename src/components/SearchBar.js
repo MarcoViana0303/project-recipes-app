@@ -16,12 +16,11 @@ function SearchBar() {
       } else {
         requestDrinksAPI(radioButton, searchInput, 'search');
       }
-    } else if (location.pathname === '/meals') {
-      if (radioButton === 'i') {
-        requestMealsAPI(radioButton, searchInput, 'filter');
-      } else {
-        requestMealsAPI(radioButton, searchInput, 'search');
-      }
+    } else if (radioButton === 'i') {
+      requestMealsAPI(radioButton, searchInput, 'filter');
+      console.log(radioButton);
+    } else {
+      requestMealsAPI(radioButton, searchInput, 'search');
     }
   };
 
