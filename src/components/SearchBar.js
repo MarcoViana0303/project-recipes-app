@@ -1,13 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 function SearchBar() {
-  const { requestDrinksAPI, requestMealsAPI, searchInput } = useContext(AppContext);
+  const {
+    requestDrinksAPI,
+    requestMealsAPI,
+    searchInput,
+    dataDrinks,
+    dataMeals,
+  } = useContext(AppContext);
 
   const [radioButton, setradioButton] = useState('');
 
   const location = useLocation();
+  const history = useHistory();
 
   const handleClick = () => {
     if (location.pathname === '/drinks') {
@@ -23,6 +30,26 @@ function SearchBar() {
       requestMealsAPI(radioButton, searchInput, 'search');
     }
   };
+
+  const pathDetails = () => {
+    const { drinks } = dataDrinks;
+    const { meals } = dataMeals;
+    console.log(location.pathname === '/drinks' && drinks.length === 1);
+    if (location.pathname === '/drinks' && drinks.length === 1) {
+      const id = drinks[0].idDrink;
+      console.log(id);
+      history.push(`/drinks/${id}`);
+    } else if (location.pathname === '/meals' && meals.length === 1) {
+      console.log(meals);
+      const id = meals[0].idMeal;
+      console.log(id);
+      history.push(`/meals/${id}`);
+    }
+  };
+
+  useEffect(() => {
+    pathDetails();
+  }, [dataMeals, dataDrinks]);
 
   useEffect(() => {
     if (searchInput.length > 1 && radioButton === 'f') {
