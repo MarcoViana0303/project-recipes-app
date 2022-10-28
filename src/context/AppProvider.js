@@ -8,6 +8,8 @@ function AppProvider({ children }) {
   const [dataMeals, setDataMeals] = useState({});
   const [dataDrinks, setDataDrinks] = useState({});
   const [searchInput, setSearchInput] = useState({});
+  const [mealList, setMealList] = useState([]);
+  const [drinksList, setDrinksList] = useState([]);
 
   const requestMealsAPI = async (type, endPoint, filter) => {
     const request = await fetch(
@@ -37,8 +39,12 @@ function AppProvider({ children }) {
       setEmail,
       requestMealsAPI,
       requestDrinksAPI,
+      mealList,
+      setMealList,
+      drinksList,
+      setDrinksList,
     }
-  ), [dataMeals, dataDrinks, email, password, searchInput]);
+  ), [dataMeals, dataDrinks, email, password, searchInput, mealList, drinksList]);
 
   return <AppContext.Provider value={ contexto }>{children}</AppContext.Provider>;
 }
