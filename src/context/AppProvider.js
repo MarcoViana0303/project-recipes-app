@@ -5,8 +5,8 @@ import AppContext from './AppContext';
 function AppProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [dataMeals, setDataMeals] = useState({});
-  const [dataDrinks, setDataDrinks] = useState({});
+  const [dataMeals, setDataMeals] = useState({ meals: [] });
+  const [dataDrinks, setDataDrinks] = useState({ drinks: [] });
   const [searchInput, setSearchInput] = useState({});
   const [mealList, setMealList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
