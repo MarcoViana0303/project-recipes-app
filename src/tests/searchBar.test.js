@@ -43,6 +43,38 @@ describe('01 - Testando o componente SearchBar da pagina meals', () => {
     expect(window.alert).toBeCalledWith('Your search must have only 1 (one) character');
   });
 
+  // it('Verifica se o alert com a mensagem "Your search must have only 1 (one) character" aparece na tela quando nada é encontrado', () => {
+  //   window.alert = jest.fn();
+
+  //   const { history } = renderWithRouter(<App />);
+
+  //   act(() => {
+  //     history.push('/drinks');
+  //   });
+
+  //   const { pathname } = history.location;
+  //   expect(pathname).toBe('/drinks');
+  //   console.log(pathname);
+
+  //   const name = screen.getByText(/nome/i);
+  //   expect(name).toBeInTheDocument();
+  //   userEvent.click(name);
+
+  //   const search = screen.getByTestId(SEARCH_BTN);
+  //   expect(search).toBeInTheDocument();
+  //   userEvent.click(search);
+
+  //   const text = screen.getByTestId(SEARCH_INPUT);
+  //   expect(text).toBeInTheDocument();
+  //   userEvent.type(text, 'xablau');
+
+  //   const searchButton = screen.getByTestId(SEARCH_EXEC);
+  //   expect(searchButton).toBeInTheDocument();
+  //   userEvent.click(searchButton);
+
+  //   expect(window.alert).toBeCalledWith('Sorry, we haven\'t found any recipes for these filters.');
+  // });
+
   test('Verifica a URL se esta sendo chamada corretamente para o imput letter na pg meals', () => {
     const { history } = renderWithRouter(<App />);
 
@@ -264,7 +296,7 @@ describe('02 - Testando o componente SearchBar da pagina Drinks', () => {
     expect(global.fetch).toBeCalledWith('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Arrabiata');
   });
 
-  test('Verifica se o alert com a mensagem "Your search must have only 1 (one) character" aparece na tela', () => {
+  test('Verifica a URL esta sendo chamada corretamente para o imput primeira letra', () => {
     const { history } = renderWithRouter(<App />);
 
     jest.spyOn(global, 'fetch');

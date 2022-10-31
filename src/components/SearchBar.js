@@ -6,6 +6,7 @@ function SearchBar() {
   const {
     requestDrinksAPI,
     requestMealsAPI,
+    setHandleControl,
     searchInput,
     dataDrinks,
     dataMeals,
@@ -25,7 +26,6 @@ function SearchBar() {
       }
     } else if (radioButton === 'i') {
       requestMealsAPI(radioButton, searchInput, 'filter');
-      console.log(radioButton);
     } else {
       requestMealsAPI(radioButton, searchInput, 'search');
     }
@@ -34,21 +34,30 @@ function SearchBar() {
   const pathDetails = () => {
     const { drinks } = dataDrinks;
     const { meals } = dataMeals;
-    console.log(location.pathname === '/drinks' && drinks.length === 1);
     if (location.pathname === '/drinks' && drinks.length === 1) {
       const id = drinks[0].idDrink;
-      console.log(id);
       history.push(`/drinks/${id}`);
     } else if (location.pathname === '/meals' && meals.length === 1) {
-      console.log(meals);
       const id = meals[0].idMeal;
-      console.log(id);
       history.push(`/meals/${id}`);
+    }
+    setHandleControl(true);
+  };
+
+  const checkIsTrue = () => {
+    const { drinks } = dataDrinks;
+    const { meals } = dataMeals;
+    if (!drinks || !meals) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      return;
+    }
+    if (drinks || meals) {
+      pathDetails();
     }
   };
 
   useEffect(() => {
-    pathDetails();
+    checkIsTrue();
   }, [dataMeals, dataDrinks]);
 
   useEffect(() => {

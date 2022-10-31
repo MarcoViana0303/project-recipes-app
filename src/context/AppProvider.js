@@ -10,6 +10,7 @@ function AppProvider({ children }) {
   const [searchInput, setSearchInput] = useState({});
   const [mealList, setMealList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
+  const [handleControl, setHandleControl] = useState(false);
 
   const requestMealsAPI = async (type, endPoint, filter) => {
     const request = await fetch(
@@ -34,6 +35,8 @@ function AppProvider({ children }) {
       email,
       password,
       searchInput,
+      handleControl,
+      setHandleControl,
       setSearchInput,
       setPassword,
       setEmail,

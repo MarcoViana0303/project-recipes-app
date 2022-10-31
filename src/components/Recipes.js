@@ -7,21 +7,19 @@ import AppContext from '../context/AppContext';
 const MAX_RENDER = 11;
 
 function Recipes() {
-  const { drinksList, setDrinksList } = useContext(AppContext);
+  const {
+    drinksList,
+    setDrinksList,
+    handleControl,
+    dataMeals,
+    dataDrinks,
+    setHandleControl,
+  } = useContext(AppContext);
   const [buttonsList, setButtonsList] = useState([]);
 
   const { mealList, setMealList } = useContext(AppContext);
   const history = useHistory();
   const renderMeals = history.location.pathname.includes('meals');
-
-  useEffect(() => {
-    const getMealsList = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      const { meals } = await fetch(endpoint).then((response) => response.json());
-      setMealList(meals);
-    };
-    getMealsList();
-  }, [setMealList]);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -36,13 +34,42 @@ function Recipes() {
   }, []);
 
   useEffect(() => {
-    const getDrinksList = async () => {
-      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-      const { drinks } = await fetch(endpoint).then((response) => response.json());
-      setDrinksList(drinks);
-    };
-    getDrinksList();
+    if (!handleControl) {
+      const getMealsList = async () => {
+        const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+        const { meals } = await fetch(endpoint).then((response) => response.json());
+        setMealList(meals);
+      };
+      getMealsList();
+    }
+  }, [setMealList]);
+
+  useEffect(() => {
+    if (!handleControl) {
+      const getDrinksList = async () => {
+        const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+        const { drinks } = await fetch(endpoint).then((response) => response.json());
+        setDrinksList(drinks);
+      };
+      getDrinksList();
+    }
   }, [setDrinksList]);
+
+  useEffect(() => {
+    const { drinks } = dataDrinks;
+    if (handleControl && drinks) {
+      setDrinksList(drinks);
+      setHandleControl(false);
+    }
+  }, [dataDrinks]);
+
+  useEffect(() => {
+    const { meals } = dataMeals;
+    if (handleControl && meals) {
+      setMealList(meals);
+      setHandleControl(false);
+    }
+  }, [dataMeals]);
 
   return (
     <div>
@@ -62,7 +89,7 @@ function Recipes() {
                 </section>
               );
             }
-            return (null);
+            return null;
           })}
         </div>
       ) : (
@@ -81,11 +108,10 @@ function Recipes() {
                 </section>
               );
             }
-            return (null);
+            return null;
           })}
         </div>
       )}
-
     </div>
   );
 }
