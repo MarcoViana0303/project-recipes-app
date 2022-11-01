@@ -1,19 +1,21 @@
-#copy {
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    margin-left: 90%;
+.copy {
+  bottom: 0;
+  left: 0;
+  margin-left: 90%;
+  position: fixed;
+
 }
 
-#copy1 {
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    margin-left: 80%;
+.copy1 {
+  bottom: 0;
+  left: 0;
+  margin-left: 80%;
+  position: fixed;
+
 }
 
-#start {
-    bottom: 0;
-    left: 0;
-    position: fixed;
+.start {
+  bottom: 0;
+  left: 0;
+  position: fixed;
 }

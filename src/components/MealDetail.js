@@ -161,7 +161,7 @@ export default function MealDetail() {
           <button
             type="button"
             data-testid="start-recipe-btn"
-            id="start"
+            className="start"
           >
             Start Recipe
 
@@ -169,9 +169,10 @@ export default function MealDetail() {
         </Link>
         <button
           type="button"
-          id="copy1"
           onClick={ copyButton }
           data-testid="share-btn"
+          className="copy1"
+
         >
           <img src={ shareIcon } alt="icone de share" />
         </button>
@@ -186,8 +187,9 @@ export default function MealDetail() {
 
           <button
             type="button"
-            id="copy"
             onClick={ favoriteButton }
+            className="copy"
+
           >
             <img
               src={ blackHeartIcon }
@@ -198,8 +200,9 @@ export default function MealDetail() {
         ) : (
           <button
             type="button"
-            id="copy"
             onClick={ favoriteButton }
+            className="copy"
+
           >
             <img
               src={ whiteHeartIcon }
