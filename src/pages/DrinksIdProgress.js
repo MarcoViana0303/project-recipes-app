@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import RecipeInProgress from '../components/RecipeInProgress';
 
 function DrinksIdProgress() {
   const [showIdTitle, setShowIdTitle] = useState(false);
@@ -23,6 +24,7 @@ function DrinksIdProgress() {
   return (
     <div>
       { showIdTitle && <Header />}
+      <RecipeInProgress />
       <Footer />
     </div>
   );

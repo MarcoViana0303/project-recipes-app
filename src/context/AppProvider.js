@@ -11,6 +11,7 @@ function AppProvider({ children }) {
   const [mealList, setMealList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
   const [handleControl, setHandleControl] = useState(false);
+  const [getIdFromRecipe, setgetIdFromRecipe] = useState();
 
   const requestMealsAPI = async (type, endPoint, filter) => {
     const request = await fetch(
@@ -46,8 +47,10 @@ function AppProvider({ children }) {
       setMealList,
       drinksList,
       setDrinksList,
+      getIdFromRecipe,
+      setgetIdFromRecipe,
     }
-  ), [dataMeals, dataDrinks, email, password, searchInput, mealList, drinksList]);
+  ), [dataMeals, dataDrinks, email, password, searchInput, mealList, drinksList, getIdFromRecipe]);
 
   return <AppContext.Provider value={ contexto }>{children}</AppContext.Provider>;
 }
