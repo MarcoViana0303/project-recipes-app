@@ -147,7 +147,7 @@ export default function MealDetail() {
         data-testid="video"
       />
 
-      <div>
+      <div className="divScroll">
         {dataInverseAPI.map((drink, i) => {
           const handleClick = () => {
             if (renderRecipes) {
@@ -165,6 +165,7 @@ export default function MealDetail() {
                     src={ drink.strDrinkThumb }
                     alt={ drink.strDrink }
                     data-testid={ `${i}-card-img` }
+                    className="imageScroll"
                   />
                   <h2 data-testid={ `${i}-recommendation-title` }>{drink.strDrink}</h2>
                 </div>

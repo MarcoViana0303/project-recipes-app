@@ -19,3 +19,12 @@
   left: 0;
   position: fixed;
 }
+
+.imageScroll {
+  width: 180px;
+}
+
+.divScroll {
+  display: flex;
+  overflow-x:scroll;
+}
