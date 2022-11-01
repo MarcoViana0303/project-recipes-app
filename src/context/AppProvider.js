@@ -50,7 +50,14 @@ function AppProvider({ children }) {
       getIdFromRecipe,
       setgetIdFromRecipe,
     }
-  ), [dataMeals, dataDrinks, email, password, searchInput, mealList, drinksList, getIdFromRecipe]);
+  ), [dataMeals,
+    dataDrinks,
+    email,
+    password,
+    searchInput,
+    mealList,
+    drinksList,
+    getIdFromRecipe]);
 
   return <AppContext.Provider value={ contexto }>{children}</AppContext.Provider>;
 }
