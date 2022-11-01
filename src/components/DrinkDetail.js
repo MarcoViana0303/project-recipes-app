@@ -17,6 +17,7 @@ export default function DrinkDetail() {
   const [dataInverseAPI, setInverseDataAPI] = useState([]);
   const [copyClip, setCopy] = useState(false);
   const [buttonTap, setButtonTap] = useState(false);
+  const [continueButton, setContinueButton] = useState(false);
 
   const copyButton = () => {
     copy(`http://localhost:3000${history.location.pathname}`);
@@ -30,10 +31,17 @@ export default function DrinkDetail() {
       const result = await request.json();
       const recipe = renderRecipes ? result.meals[0] : result.drinks[0];
       const salvo = localStorage.getItem('favoriteRecipes');
+      const inProgress = localStorage.getItem('inProgressRecipes');
+
       if (salvo === null) {
         setButtonTap(false);
       } else {
         setButtonTap(true);
+      }
+      if (inProgress === null) {
+        setContinueButton(false);
+      } else {
+        setContinueButton(true);
       }
       setDataAPI(recipe);
     };
@@ -49,6 +57,14 @@ export default function DrinkDetail() {
     getRecipesID();
     getRecommendationsID();
   }, [id, renderRecipes, setInverseDataAPI]);
+
+  const inProgress = () => {
+    const inProgressLocal = {
+      drinks: { 15997: [dataAPI.strIngredient1] },
+      meals: { 52977: [] },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressLocal));
+  };
 
   const favoriteButton = () => {
     const local = [{
@@ -151,17 +167,28 @@ export default function DrinkDetail() {
           return (null);
         })}
       </div>
-      <Link to={ `/drinks/${dataAPI.idDrink}/in-progress` }>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="start"
-
-        >
-          Start Recipe
-
-        </button>
-      </Link>
+      {continueButton === false ? (
+        <Link to={ `/drinks/${dataAPI.idDrink}/in-progress` }>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="start"
+            onClick={ inProgress }
+          >
+            Start Recipe
+          </button>
+        </Link>)
+        : (
+          <Link to={ `/drinks/${dataAPI.idDrink}/in-progress` }>
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start"
+              onClick={ inProgress }
+            >
+              Continue Recipe
+            </button>
+          </Link>)}
       <button
         type="button"
         onClick={ copyButton }
