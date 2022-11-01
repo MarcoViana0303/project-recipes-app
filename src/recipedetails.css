@@ -26,5 +26,5 @@
 
 .divScroll {
   display: flex;
-  overflow-x:scroll;
+  overflow-x: scroll;
 }
