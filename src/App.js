@@ -5,13 +5,14 @@ import './App.css';
 import Login from './pages/Login';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
-import MealsId from './pages/MealsId';
-import DrinksId from './pages/DrinksId';
+// import MealsId from './pages/MealsId';
+// import DrinksId from './pages/DrinksId';
 import MealsIdProgress from './pages/MealsIdProgress';
 import DrinksIdProgress from './pages/DrinksIdProgress';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Meals } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route exact path="/meals/:id" component={ MealsId } />
-        <Route exact path="/drinks/:id" component={ DrinksId } />
+        <Route exact path="/meals/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks/:id" component={ RecipeDetails } />
         <Route
           exact
           path="/meals/:id/in-progress"

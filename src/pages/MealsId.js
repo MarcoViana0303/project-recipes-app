@@ -17,7 +17,6 @@ function Mealsid() {
 
   useEffect(() => {
     titlePage();
-    console.log(Object.keys(showParams).length);
   }, []);
 
   return (
