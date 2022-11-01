@@ -19,8 +19,6 @@ function Drinksid() {
 
   useEffect(() => {
     titlePage();
-    console.log(Object.keys(showParams).length);
-    console.log(showParams);
   }, []);
 
   return (

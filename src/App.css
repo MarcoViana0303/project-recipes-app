@@ -70,5 +70,6 @@
 footer {
   bottom: 0;
   left: 0;
+  margin-left: 49%;
   position: fixed;
 }
