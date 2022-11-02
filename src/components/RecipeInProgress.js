@@ -1,57 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-// import { useLocation, useParams } from 'react-router-dom';
 
 function RecipeInProgress() {
-  const [mealList, setMealList] = useState([]);
-  const [drinkList, setDrinkList] = useState([]);
+  const [showRecipe, setShowRecipe] = useState([]);
   const { id } = useParams();
-  console.log(mealList, 'array meal');
-  console.log(drinkList, 'array drink');
   const history = useHistory();
   const renderMeals = history.location.pathname.includes('meals');
-  let showRecipe = 0;
 
   useEffect(() => {
-    const getMealsList = async () => {
-      const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-      const { meals } = await fetch(endpoint).then((response) => response.json());
-      setMealList(meals);
-    };
-    const getDrinksList = async () => {
-      const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-      const { drinks } = await fetch(endpoint).then((response) => response.json());
-      setDrinkList(drinks);
-    };
-    getMealsList();
-    getDrinksList();
+    if (renderMeals) {
+      const getMealsList = async () => {
+        const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+        const { meals } = await fetch(endpoint).then((response) => response.json());
+        setShowRecipe(meals);
+      };
+      getMealsList();
+    } else {
+      const getDrinksList = async () => {
+        const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+        const { drinks } = await fetch(endpoint).then((response) => response.json());
+        setShowRecipe(drinks);
+      };
+      getDrinksList();
+    }
   }, []);
 
-  if (renderMeals) {
-    showRecipe = mealList.filter((item) => id === item.idMeal);
-    // console.log('show meal');
-    console.log(showRecipe, 'showRecipemelas');
-  } else {
-    showRecipe = drinkList.filter((item) => id === item.idDrink);
-    // console.log('show drink');
-    console.log(showRecipe, 'showRecipedrinks');
-  }
-
   const showIngredients = () => {
-    if (showRecipe.length > 0) {
+    if (showRecipe.length) {
       const ingredientCheckbox = Object.entries(showRecipe[0]);
       const filteredIngredients = ingredientCheckbox
-        .filter((item) => item[0].includes('strIngredient'));
-      // console.log(filteredIngredients, 'funcShowIngredients');
+        .filter((item) => item[0]
+          .includes('strIngredient') && item[1] !== '' && item[1] !== null);
       return filteredIngredients;
     }
     return [];
   };
 
-  /*   useEffect(() => {
-    showIngredients();
-  }, [mealList, drinkList]);
- */
   return (
     <div>
       <h1 data-testid="recipe-title">
