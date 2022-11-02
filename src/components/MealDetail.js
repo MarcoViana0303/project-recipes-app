@@ -22,22 +22,16 @@ export default function MealDetail() {
   const copyButton = () => {
     copy(`http://localhost:3000${history.location.pathname}`);
     setCopy(true);
+    console.log(copyClip);
   };
-
   useEffect(() => {
     const getRecipesID = async () => {
       const content = renderRecipes ? 'mealdb' : 'cocktaildb';
       const request = await fetch(`https://www.the${content}.com/api/json/v1/1/lookup.php?i=${id}`);
       const result = await request.json();
       const recipe = renderRecipes ? result.meals[0] : result.drinks[0];
-      const salvo = localStorage.getItem('favoriteRecipes');
       const inProgress = localStorage.getItem('inProgressRecipes');
 
-      if (salvo === null) {
-        setButtonTap(false);
-      } else {
-        setButtonTap(true);
-      }
       if (inProgress === null) {
         setContinueButton(false);
       } else {
@@ -67,7 +61,7 @@ export default function MealDetail() {
   };
 
   const favoriteButton = () => {
-    const local = [{
+    const atual = {
       id: dataAPI.idMeal,
       type: 'meal',
       nationality: dataAPI.strArea,
@@ -75,8 +69,16 @@ export default function MealDetail() {
       alcoholicOrNot: '',
       name: dataAPI.strMeal,
       image: dataAPI.strMealThumb,
-    }];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(local));
+    };
+    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    let locais = [];
+    if (local !== null) {
+      locais = [...local, atual];
+    } else {
+      locais = [atual];
+    }
+    console.log(locais);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(locais));
     if (buttonTap === false) {
       setButtonTap(true);
     } else {

@@ -44,7 +44,6 @@ function Header() {
       || location.pathname === '/favorite-recipes'
     ) {
       setIsRender(false);
-      console.log(isRender);
     }
     pathTitle();
   }, []);
