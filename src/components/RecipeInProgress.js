@@ -12,6 +12,7 @@ function RecipeInProgress() {
   const [idInput, setIdInput] = useState([]);
   const [copy1, setCopy1] = useState(false);
   const [favorite, setfavorite] = useState(false);
+  const [isActivatedButton, setisActivatedButton] = useState(true);
   const { id } = useParams();
   const history = useHistory();
   const renderMeals = history.location.pathname.includes('meals');
@@ -100,6 +101,7 @@ function RecipeInProgress() {
     } else {
       localStorage.setItem(id, JSON.stringify(idInput));
     }
+    disableButton();
   }, [idInput]);
 
   useEffect(() => {
@@ -121,6 +123,15 @@ function RecipeInProgress() {
       return filteredIngredients;
     }
     return [];
+  };
+
+  const disableButton = () => {
+    const numCheckboxes = showIngredients().length;
+    if (numCheckboxes <= idInput.length) {
+      setisActivatedButton(false);
+    } else {
+      setisActivatedButton(true);
+    }
   };
 
   const handleClick = (target, arg) => {
@@ -188,7 +199,11 @@ function RecipeInProgress() {
           {ingr[1]}
         </label>
       ))}
-      <button data-testid="finish-recipe-btn" type="button">
+      <button
+        data-testid="finish-recipe-btn"
+        type="button"
+        disabled={ isActivatedButton }
+      >
         Finalizar
       </button>
     </div>
