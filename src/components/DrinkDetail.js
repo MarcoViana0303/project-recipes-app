@@ -18,20 +18,24 @@ export default function DrinkDetail() {
   const [copyClip, setCopy] = useState(false);
   const [buttonTap, setButtonTap] = useState(false);
   const [continueButton, setContinueButton] = useState(false);
-
   const copyButton = () => {
     copy(`http://localhost:3000${history.location.pathname}`);
     setCopy(true);
     console.log(copyClip);
   };
-
   useEffect(() => {
     const getRecipesID = async () => {
       const content = renderRecipes ? 'mealdb' : 'cocktaildb';
       const request = await fetch(`https://www.the${content}.com/api/json/v1/1/lookup.php?i=${id}`);
       const result = await request.json();
       const recipe = renderRecipes ? result.meals[0] : result.drinks[0];
+      const salvo = localStorage.getItem('favoriteRecipes');
       const inProgress = localStorage.getItem('inProgressRecipes');
+      if (salvo === null) {
+        setButtonTap(false);
+      } else {
+        setButtonTap(true);
+      }
       // if (dataAPI.idDrink)
       // if (salvo === null) {
       //   setButtonTap(false);
@@ -44,11 +48,7 @@ export default function DrinkDetail() {
         setContinueButton(true);
       }
       setDataAPI(recipe);
-      const salvo = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const marco = salvo.filter((receita) => dataAPI.idDrink === receita.id);
-      console.log(marco);
     };
-
     const getRecommendationsID = async () => {
       const content = renderRecipes ? 'cocktaildb' : 'mealdb';
       const request = await fetch(`https://www.the${content}.com/api/json/v1/1/search.php?s=`);

@@ -30,7 +30,13 @@ export default function MealDetail() {
       const request = await fetch(`https://www.the${content}.com/api/json/v1/1/lookup.php?i=${id}`);
       const result = await request.json();
       const recipe = renderRecipes ? result.meals[0] : result.drinks[0];
+      const salvo = localStorage.getItem('favoriteRecipes');
       const inProgress = localStorage.getItem('inProgressRecipes');
+      if (salvo === null) {
+        setButtonTap(false);
+      } else {
+        setButtonTap(true);
+      }
 
       if (inProgress === null) {
         setContinueButton(false);
@@ -198,17 +204,14 @@ export default function MealDetail() {
                 Continue Recipe
               </button>
             </Link>)}
-
         <button
           type="button"
           onClick={ copyButton }
           data-testid="share-btn"
           className="copy1"
-
         >
           <img src={ shareIcon } alt="icone de share" />
         </button>
-
         <div>
           {copyClip
          && (
@@ -216,12 +219,10 @@ export default function MealDetail() {
          )}
         </div>
         {buttonTap ? (
-
           <button
             type="button"
             onClick={ favoriteButton }
             className="copy"
-
           >
             <img
               src={ blackHeartIcon }
@@ -234,7 +235,6 @@ export default function MealDetail() {
             type="button"
             onClick={ favoriteButton }
             className="copy"
-
           >
             <img
               src={ whiteHeartIcon }
