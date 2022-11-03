@@ -33,8 +33,9 @@ function Recipes() {
     return () => setButtonsList([]);
   }, []);
 
+  // Modifiquei
   useEffect(() => {
-    if (!handleControl) {
+    if (!handleControl && renderMeals) {
       const getMealsList = async () => {
         const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
         const { meals } = await fetch(endpoint).then((response) => response.json());
@@ -45,7 +46,7 @@ function Recipes() {
   }, [setMealList]);
 
   useEffect(() => {
-    if (!handleControl) {
+    if (!handleControl && !renderMeals) {
       const getDrinksList = async () => {
         const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
         const { drinks } = await fetch(endpoint).then((response) => response.json());
@@ -95,7 +96,7 @@ function Recipes() {
       ) : (
         <div>
           <Buttons categories={ buttonsList } type="drinks" />
-          {drinksList.map((drink, i) => {
+          {drinksList?.map((drink, i) => {
             if (i <= MAX_RENDER) {
               return (
                 <section key={ drink.idDrink } data-testid={ `${i}-recipe-card` }>
