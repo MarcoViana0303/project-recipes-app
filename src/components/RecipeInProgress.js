@@ -5,6 +5,9 @@ import icon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
+const dateNow = new Date();
+// import DoneRecipes from '../pages/DoneRecipes';
+
 const copy = require('clipboard-copy');
 
 function RecipeInProgress() {
@@ -147,17 +150,52 @@ function RecipeInProgress() {
     setfavorite((prev) => !prev);
   };
 
+  const handleFinish = () => {
+    if (renderMeals) {
+      const local = [
+        {
+          alcoholicOrNot: '',
+          category: showRecipe[0].strCategory,
+          doneDate: dateNow.toISOString(),
+          id: showRecipe[0].idMeal,
+          image: showRecipe[0].strMealThumb,
+          name: showRecipe[0].strMeal,
+          nationality: showRecipe[0].strArea,
+          tags: showRecipe[0]?.strTags.split(','),
+          type: 'meal',
+        },
+      ];
+      localStorage.setItem('doneRecipes', JSON.stringify(local));
+      console.log(local);
+    } else {
+      const local = [
+        {
+          id: showRecipe[0].idDrink,
+          doneDate: dateNow.toISOString(),
+          tags: showRecipe[0]?.strTags.split(','),
+          type: 'drink',
+          nationality: '',
+          category: showRecipe[0].strCategory,
+          alcoholicOrNot: showRecipe[0].strAlcoholic,
+          name: showRecipe[0].strDrink,
+          image: showRecipe[0].strDrinkThumb,
+        },
+      ];
+      localStorage.setItem('doneRecipes', JSON.stringify(local));
+    }
+    // localStorage.setItem('doneRecipes', JSON.stringify({ id: 'name' }));
+    history.push('/done-recipes');
+  };
+
+  // console.log(showRecipe);
+
   return (
     <div>
       <h1 data-testid="recipe-title">
         {renderMeals ? showRecipe[0]?.strMeal : showRecipe[0]?.strDrink}
       </h1>
       <img
-        src={
-          renderMeals
-            ? showRecipe[0]?.strMealThumb
-            : showRecipe[0]?.strDrinkThumb
-        }
+        src={ showRecipe[0]?.strMealThumb || showRecipe[0]?.strDrinkThumb }
         alt={ renderMeals ? showRecipe[0]?.strMeal : showRecipe[0]?.strDrink }
         data-testid="recipe-photo"
         className="imagem"
@@ -203,6 +241,7 @@ function RecipeInProgress() {
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ isActivatedButton }
+        onClick={ handleFinish }
       >
         Finalizar
       </button>
