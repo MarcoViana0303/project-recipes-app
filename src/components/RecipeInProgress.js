@@ -187,8 +187,6 @@ function RecipeInProgress() {
     history.push('/done-recipes');
   };
 
-  // console.log(showRecipe);
-
   return (
     <div>
       <h1 data-testid="recipe-title">
