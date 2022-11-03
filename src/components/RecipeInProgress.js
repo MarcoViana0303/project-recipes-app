@@ -25,6 +25,47 @@ function RecipeInProgress() {
     setCopy1(true);
   };
 
+  const getlocalStorage = () => {
+    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const favoriteFromStorage = favorites.find((el) => el.id);
+    if (id === favoriteFromStorage?.id) {
+      setfavorite(true);
+    }
+  };
+
+  const removeFavorite = () => {
+    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const favoriteFromStorage = favorites.filter((el) => el.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteFromStorage));
+  };
+
+  const salveFavorite = () => {
+    if (renderMeals) {
+      const local = [{
+        id: showRecipe[0].idMeal,
+        type: 'meal',
+        nationality: showRecipe[0].strArea,
+        category: showRecipe[0].strCategory,
+        alcoholicOrNot: '',
+        name: showRecipe[0].strMeal,
+        image: showRecipe[0].strMealThumb,
+      }];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(local));
+      console.log(local);
+    } else {
+      const local = [{
+        id: showRecipe[0].idDrink,
+        type: 'drink',
+        nationality: '',
+        category: showRecipe[0].strCategory,
+        alcoholicOrNot: showRecipe[0].strAlcoholic,
+        name: showRecipe[0].strDrink,
+        image: showRecipe[0].strDrinkThumb,
+      }];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(local));
+    }
+  };
+
   useEffect(() => {
     if (renderMeals) {
       const getMealsList = async () => {
@@ -43,6 +84,7 @@ function RecipeInProgress() {
     }
     const checked = JSON.parse(localStorage.getItem(id)) || [];
     setIdInput(checked);
+    getlocalStorage();
   }, []);
 
   useEffect(() => {
@@ -52,6 +94,14 @@ function RecipeInProgress() {
       localStorage.setItem(id, JSON.stringify(idInput));
     }
   }, [idInput]);
+
+  useEffect(() => {
+    if (favorite) {
+      salveFavorite();
+    } else {
+      removeFavorite();
+    }
+  }, [favorite]);
 
   const showIngredients = () => {
     if (showRecipe.length) {
