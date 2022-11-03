@@ -77,7 +77,7 @@ export default function Buttons({ categories, type }) {
       >
         All
       </button>
-      {categories.map((category, i) => {
+      {categories?.map((category, i) => {
         if (i <= MAX_RENDER) {
           return (
             <button

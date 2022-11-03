@@ -34,10 +34,10 @@ function SearchBar() {
   const pathDetails = () => {
     const { drinks } = dataDrinks;
     const { meals } = dataMeals;
-    if (location.pathname === '/drinks' && drinks.length === 1) {
+    if (location.pathname.includes('/drinks') && drinks.length === 1) {
       const id = drinks[0].idDrink;
       history.push(`/drinks/${id}`);
-    } else if (location.pathname === '/meals' && meals.length === 1) {
+    } else if (location.pathname.includes('/meals') && meals.length === 1) {
       const id = meals[0].idMeal;
       history.push(`/meals/${id}`);
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import RecipeInProgress from '../components/RecipeInProgress';
 
 function MealsIdProgress() {
   const [showIdTitle, setShowIdTitle] = useState(false);
@@ -17,12 +18,12 @@ function MealsIdProgress() {
 
   useEffect(() => {
     titlePage();
-    console.log(Object.keys(showParams).length);
   }, []);
 
   return (
     <div>
       { showIdTitle && <Header />}
+      <RecipeInProgress />
       <Footer />
     </div>
   );
