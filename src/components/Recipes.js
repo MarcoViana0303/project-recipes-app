@@ -33,7 +33,6 @@ function Recipes() {
     return () => setButtonsList([]);
   }, []);
 
-  // Modifiquei
   useEffect(() => {
     if (!handleControl && renderMeals) {
       const getMealsList = async () => {
