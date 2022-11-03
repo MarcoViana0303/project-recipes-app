@@ -96,15 +96,6 @@ function RecipeInProgress() {
   }, []);
 
   useEffect(() => {
-    if (idInput.length === 0) {
-      localStorage.removeItem(id);
-    } else {
-      localStorage.setItem(id, JSON.stringify(idInput));
-    }
-    disableButton();
-  }, [idInput]);
-
-  useEffect(() => {
     if (favorite) {
       salveFavorite();
     } else {
@@ -133,6 +124,15 @@ function RecipeInProgress() {
       setisActivatedButton(true);
     }
   };
+
+  useEffect(() => {
+    if (idInput.length === 0) {
+      localStorage.removeItem(id);
+    } else {
+      localStorage.setItem(id, JSON.stringify(idInput));
+    }
+    disableButton();
+  }, [idInput]);
 
   const handleClick = (target, arg) => {
     if (target.checked) {
