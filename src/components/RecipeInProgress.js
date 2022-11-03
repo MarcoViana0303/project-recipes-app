@@ -36,32 +36,39 @@ function RecipeInProgress() {
   const removeFavorite = () => {
     const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const favoriteFromStorage = favorites.filter((el) => el.id !== id);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteFromStorage));
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify(favoriteFromStorage),
+    );
   };
 
   const salveFavorite = () => {
     if (renderMeals) {
-      const local = [{
-        id: showRecipe[0].idMeal,
-        type: 'meal',
-        nationality: showRecipe[0].strArea,
-        category: showRecipe[0].strCategory,
-        alcoholicOrNot: '',
-        name: showRecipe[0].strMeal,
-        image: showRecipe[0].strMealThumb,
-      }];
+      const local = [
+        {
+          id: showRecipe[0].idMeal,
+          type: 'meal',
+          nationality: showRecipe[0].strArea,
+          category: showRecipe[0].strCategory,
+          alcoholicOrNot: '',
+          name: showRecipe[0].strMeal,
+          image: showRecipe[0].strMealThumb,
+        },
+      ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(local));
       console.log(local);
     } else {
-      const local = [{
-        id: showRecipe[0].idDrink,
-        type: 'drink',
-        nationality: '',
-        category: showRecipe[0].strCategory,
-        alcoholicOrNot: showRecipe[0].strAlcoholic,
-        name: showRecipe[0].strDrink,
-        image: showRecipe[0].strDrinkThumb,
-      }];
+      const local = [
+        {
+          id: showRecipe[0].idDrink,
+          type: 'drink',
+          nationality: '',
+          category: showRecipe[0].strCategory,
+          alcoholicOrNot: showRecipe[0].strAlcoholic,
+          name: showRecipe[0].strDrink,
+          image: showRecipe[0].strDrinkThumb,
+        },
+      ];
       localStorage.setItem('favoriteRecipes', JSON.stringify(local));
     }
   };
@@ -161,7 +168,9 @@ function RecipeInProgress() {
       </button>
 
       <p data-testid="recipe-category">{showRecipe[0]?.strCategory}</p>
-      <p data-testid="instructions">{showRecipe[0]?.strInstructions}</p>
+      <p data-testid="instructions" className="instructions">
+        {showRecipe[0]?.strInstructions}
+      </p>
       {showIngredients().map((ingr, i) => (
         <label
           key={ i }
