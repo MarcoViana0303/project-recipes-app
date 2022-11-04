@@ -166,7 +166,6 @@ function RecipeInProgress() {
         },
       ];
       localStorage.setItem('doneRecipes', JSON.stringify(local));
-      console.log(local);
     } else {
       const local = [
         {
