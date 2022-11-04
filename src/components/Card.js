@@ -15,7 +15,12 @@ export default function Card({ thumb, str, index, idMeal }) {
 
   return (
     <div onClick={ handleClick } role="presentation">
-      <img src={ thumb } alt={ str } data-testid={ `${index}-card-img` } />
+      <img
+        src={ thumb }
+        className="favoriteIMG"
+        alt={ str }
+        data-testid={ `${index}-card-img` }
+      />
       <h2 data-testid={ `${index}-card-name` }>{str}</h2>
     </div>
   );

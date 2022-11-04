@@ -99,6 +99,7 @@ export default function MealDetail() {
         src={ `${dataAPI?.strMealThumb}` }
         alt={ `${dataAPI?.strMeal}` }
         data-testid="recipe-photo"
+        className="favoriteIMG"
       />
       <h2 data-testid="recipe-category">{dataAPI?.strCategory}</h2>
       <p data-testid="instructions">{dataAPI?.strInstructions}</p>
@@ -163,7 +164,6 @@ export default function MealDetail() {
               history.push(`/meals/${drink?.idDrink}`);
             }
           };
-
           if (i <= MAX_RENDER) {
             return (
               <section key={ drink.idDrink } data-testid={ `${i}-recommendation-card` }>
