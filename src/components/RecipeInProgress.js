@@ -183,7 +183,6 @@ function RecipeInProgress() {
       ];
       localStorage.setItem('doneRecipes', JSON.stringify(local));
     }
-    // localStorage.setItem('doneRecipes', JSON.stringify({ id: 'name' }));
     history.push('/done-recipes');
   };
 
