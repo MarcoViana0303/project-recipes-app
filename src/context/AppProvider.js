@@ -63,7 +63,7 @@ function AppProvider({ children }) {
 }
 
 AppProvider.propTypes = {
-  children: PropTypes.shape.isRequired,
+  children: PropTypes.shape({}).isRequired,
 };
 
 export default AppProvider;

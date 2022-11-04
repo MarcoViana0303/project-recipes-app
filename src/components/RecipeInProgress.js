@@ -5,6 +5,9 @@ import icon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
+const dateNow = new Date();
+// import DoneRecipes from '../pages/DoneRecipes';
+
 const copy = require('clipboard-copy');
 
 function RecipeInProgress() {
@@ -12,6 +15,7 @@ function RecipeInProgress() {
   const [idInput, setIdInput] = useState([]);
   const [copy1, setCopy1] = useState(false);
   const [favorite, setfavorite] = useState(false);
+  const [isActivatedButton, setisActivatedButton] = useState(true);
   const { id } = useParams();
   const history = useHistory();
   const renderMeals = history.location.pathname.includes('meals');
@@ -95,14 +99,6 @@ function RecipeInProgress() {
   }, []);
 
   useEffect(() => {
-    if (idInput.length === 0) {
-      localStorage.removeItem(id);
-    } else {
-      localStorage.setItem(id, JSON.stringify(idInput));
-    }
-  }, [idInput]);
-
-  useEffect(() => {
     if (favorite) {
       salveFavorite();
     } else {
@@ -123,6 +119,24 @@ function RecipeInProgress() {
     return [];
   };
 
+  const disableButton = () => {
+    const numCheckboxes = showIngredients().length;
+    if (numCheckboxes <= idInput.length) {
+      setisActivatedButton(false);
+    } else {
+      setisActivatedButton(true);
+    }
+  };
+
+  useEffect(() => {
+    if (idInput.length === 0) {
+      localStorage.removeItem(id);
+    } else {
+      localStorage.setItem(id, JSON.stringify(idInput));
+    }
+    disableButton();
+  }, [idInput]);
+
   const handleClick = (target, arg) => {
     if (target.checked) {
       setIdInput((prev) => [...prev, arg]);
@@ -136,17 +150,49 @@ function RecipeInProgress() {
     setfavorite((prev) => !prev);
   };
 
+  const handleFinish = () => {
+    if (renderMeals) {
+      const local = [
+        {
+          alcoholicOrNot: '',
+          category: showRecipe[0].strCategory,
+          doneDate: dateNow.toISOString(),
+          id: showRecipe[0].idMeal,
+          image: showRecipe[0].strMealThumb,
+          name: showRecipe[0].strMeal,
+          nationality: showRecipe[0].strArea,
+          tags: showRecipe[0]?.strTags.split(','),
+          type: 'meal',
+        },
+      ];
+      localStorage.setItem('doneRecipes', JSON.stringify(local));
+      console.log(local);
+    } else {
+      const local = [
+        {
+          id: showRecipe[0].idDrink,
+          doneDate: dateNow.toISOString(),
+          tags: showRecipe[0]?.strTags.split(','),
+          type: 'drink',
+          nationality: '',
+          category: showRecipe[0].strCategory,
+          alcoholicOrNot: showRecipe[0].strAlcoholic,
+          name: showRecipe[0].strDrink,
+          image: showRecipe[0].strDrinkThumb,
+        },
+      ];
+      localStorage.setItem('doneRecipes', JSON.stringify(local));
+    }
+    history.push('/done-recipes');
+  };
+
   return (
     <div>
       <h1 data-testid="recipe-title">
         {renderMeals ? showRecipe[0]?.strMeal : showRecipe[0]?.strDrink}
       </h1>
       <img
-        src={
-          renderMeals
-            ? showRecipe[0]?.strMealThumb
-            : showRecipe[0]?.strDrinkThumb
-        }
+        src={ showRecipe[0]?.strMealThumb || showRecipe[0]?.strDrinkThumb }
         alt={ renderMeals ? showRecipe[0]?.strMeal : showRecipe[0]?.strDrink }
         data-testid="recipe-photo"
         className="imagem"
@@ -188,7 +234,12 @@ function RecipeInProgress() {
           {ingr[1]}
         </label>
       ))}
-      <button data-testid="finish-recipe-btn" type="button">
+      <button
+        data-testid="finish-recipe-btn"
+        type="button"
+        disabled={ isActivatedButton }
+        onClick={ handleFinish }
+      >
         Finalizar
       </button>
     </div>
