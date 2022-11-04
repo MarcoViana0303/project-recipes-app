@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../recipedetails.css';
@@ -28,7 +28,7 @@ function FavoriteRecipes() {
   };
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <button
         type="button"
         data-testid="filter-by-all-btn"

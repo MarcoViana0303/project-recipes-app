@@ -40,4 +40,9 @@ describe('Teste do componente Profile', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/');
   });
+  it('teste localStorage', () => {
+    renderWithRouter(<Profile />);
+    const local = localStorage.getItem('email');
+    expect(local).toBeNull();
+  });
 });
