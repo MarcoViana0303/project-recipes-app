@@ -67,7 +67,6 @@ export default function DrinkDetail() {
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressLocal));
   };
-
   const favoriteButton = () => {
     const atual = {
       id: dataAPI.idDrink,
@@ -101,6 +100,7 @@ export default function DrinkDetail() {
         src={ `${dataAPI.strDrinkThumb}` }
         alt={ `${dataAPI.strDrink}` }
         data-testid="recipe-photo"
+        className="favoriteIMG"
       />
       <h2 data-testid="recipe-category">
         {dataAPI.strCategory}
