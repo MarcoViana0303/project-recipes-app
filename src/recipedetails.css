@@ -28,3 +28,11 @@
   display: flex;
   overflow-x: scroll;
 }
+
+.favoriteIMG {
+  width: 180px;
+}
+
+.FavoritesButton {
+  margin-right: 300px;
+}

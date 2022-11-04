@@ -18,12 +18,11 @@ export default function DrinkDetail() {
   const [copyClip, setCopy] = useState(false);
   const [buttonTap, setButtonTap] = useState(false);
   const [continueButton, setContinueButton] = useState(false);
-
   const copyButton = () => {
     copy(`http://localhost:3000${history.location.pathname}`);
     setCopy(true);
+    console.log(copyClip);
   };
-
   useEffect(() => {
     const getRecipesID = async () => {
       const content = renderRecipes ? 'mealdb' : 'cocktaildb';
@@ -32,12 +31,17 @@ export default function DrinkDetail() {
       const recipe = renderRecipes ? result.meals[0] : result.drinks[0];
       const salvo = localStorage.getItem('favoriteRecipes');
       const inProgress = localStorage.getItem('inProgressRecipes');
-
       if (salvo === null) {
         setButtonTap(false);
       } else {
         setButtonTap(true);
       }
+      // if (dataAPI.idDrink)
+      // if (salvo === null) {
+      //   setButtonTap(false);
+      // } else {
+      //   setButtonTap(true);
+      // }
       if (inProgress === null) {
         setContinueButton(false);
       } else {
@@ -45,12 +49,10 @@ export default function DrinkDetail() {
       }
       setDataAPI(recipe);
     };
-
     const getRecommendationsID = async () => {
       const content = renderRecipes ? 'cocktaildb' : 'mealdb';
       const request = await fetch(`https://www.the${content}.com/api/json/v1/1/search.php?s=`);
       const result = await request.json();
-      console.log(result);
       const recipe = renderRecipes ? result.drinks : result.meals;
       setInverseDataAPI(recipe);
     };
@@ -67,7 +69,7 @@ export default function DrinkDetail() {
   };
 
   const favoriteButton = () => {
-    const local = [{
+    const atual = {
       id: dataAPI.idDrink,
       type: 'drink',
       nationality: '',
@@ -75,8 +77,16 @@ export default function DrinkDetail() {
       alcoholicOrNot: dataAPI.strAlcoholic,
       name: dataAPI.strDrink,
       image: dataAPI.strDrinkThumb,
-    }];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(local));
+    };
+    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    let locais = [];
+    if (local !== null) {
+      locais = [...local, atual];
+    } else {
+      locais = [atual];
+    }
+    console.log(locais);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(locais));
     if (buttonTap === false) {
       setButtonTap(true);
     } else {
