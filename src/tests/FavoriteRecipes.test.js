@@ -27,11 +27,7 @@ const storage = JSON.stringify([
 
 describe('Teste do componente Profile', () => {
   it('test render card', () => {
-    Object.defineProperty(global, 'localStorage', {
-      value: {
-        getItem: () => storage,
-      },
-    });
+    localStorage.setItem('favoriteRecipes', storage);
     renderWithRouter(<FavoriteRecipes />);
     const image = screen.getByTestId('0-horizontal-image');
     const name = screen.getByTestId('0-horizontal-name');
@@ -49,42 +45,53 @@ describe('Teste do componente Profile', () => {
     expect(mealBtn).toBeInTheDocument();
     expect(drinkBtn).toBeInTheDocument();
   });
-  //   it('test buttons works', () => {
-  //     Object.defineProperty(global, 'localStorage', {
-  //       value: {
-  //         getItem: () => storage,
-  //       },
-  //     });
-  //     renderWithRouter(<FavoriteRecipes />);
-  //     const allBtn = screen.getByTestId('filter-by-all-btn');
-  //     const mealBtn = screen.getByTestId('filter-by-meal-btn');
-  //     const drinkBtn = screen.getByTestId('filter-by-drink-btn');
-
-  //     const image = screen.getByTestId('0-horizontal-image');
-  //     // const image1 = screen.getByTestId('1-horizontal-image');
-
-  //     userEvent.click(allBtn);
-  //     expect(image).toBeInTheDocument();
-
-  //     userEvent.click(mealBtn);
-  //     const imageMeal = screen.getByAltText('Foto de Spicy Arrabiata Penne');
-  //     expect(imageMeal).toBeInTheDocument();
-
-  //     userEvent.click(drinkBtn);
-  //     expect(image).toBeInTheDocument();
-  //   });
   it('test buttons works', () => {
-    Object.defineProperty(global, 'localStorage', {
-      value: {
-        getItem: () => storage,
-      },
-    });
+    localStorage.setItem('favoriteRecipes', storage);
+    renderWithRouter(<FavoriteRecipes />);
+    const allBtn = screen.getByTestId('filter-by-all-btn');
+    const mealBtn = screen.getByTestId('filter-by-meal-btn');
+    const drinkBtn = screen.getByTestId('filter-by-drink-btn');
+
+    userEvent.click(allBtn);
+    const image = screen.getByTestId('0-horizontal-image');
+    expect(image).toBeInTheDocument();
+
+    userEvent.click(mealBtn);
+    const imageMeal = screen.queryByAltText('Foto de Spicy Arrabiata Penne');
+    const imageDrink = screen.queryByAltText('Aquamarine');
+    expect(imageMeal).toBeInTheDocument();
+    expect(imageDrink).not.toBeInTheDocument();
+
+    userEvent.click(drinkBtn);
+    const imageMeal1 = screen.queryByAltText('Foto de Spicy Arrabiata Penne');
+    const imageDrink1 = screen.queryByAltText('Aquamarine');
+    expect(imageMeal1).not.toBeInTheDocument();
+    expect(imageDrink1).toBeInTheDocument();
+  });
+  it('test button unfavorite works', () => {
+    localStorage.setItem('favoriteRecipes', storage);
     renderWithRouter(<FavoriteRecipes />);
 
     const favoriteBtn = screen.getByTestId('1-horizontal-favorite-btn');
 
     userEvent.click(favoriteBtn);
-    const image = screen.getByTestId('1-horizontal-image');
-    expect(image).toBeInTheDocument();
+    const image = screen.queryByTestId('1-horizontal-image');
+    expect(image).not.toBeInTheDocument();
+    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    expect(local).toHaveLength(1);
+  });
+  it('test button share works', () => {
+    localStorage.setItem('favoriteRecipes', storage);
+    const mockClipboard = {
+      writeText: jest.fn(),
+    };
+    global.navigator.clipboard = mockClipboard;
+    renderWithRouter(<FavoriteRecipes />);
+
+    const shareBtn = screen.getByTestId('0-horizontal-share-btn');
+
+    userEvent.click(shareBtn);
+    const link = screen.getByText(/link copied!/i);
+    expect(link).toBeInTheDocument();
   });
 });
