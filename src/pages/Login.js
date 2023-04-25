@@ -25,8 +25,8 @@ function Login({ history }) {
   }, [email, password]);
 
   return (
-    <div>
-      <form>
+    <div className='container'>
+      <form className='login-container'>
         <label htmlFor="email">
           <input
             type="email"
