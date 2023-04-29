@@ -67,7 +67,7 @@ function SearchBar() {
   }, [searchInput]);
 
   return (
-    <form>
+    <form className='search-recipes'>
       <div>
         <label htmlFor="ingrediente">
           <input

@@ -47,6 +47,7 @@ function Login({ history }) {
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
+        <h6>Campos obrigatórios.*</h6>
         <button
           type="submit"
           data-testid="login-submit-btn"

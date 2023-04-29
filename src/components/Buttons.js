@@ -69,7 +69,7 @@ export default function Buttons({ categories, type }) {
     setFilteredButton('');
   };
   return (
-    <section>
+    <section className='section-button'>
       <button
         type="button"
         data-testid="All-category-filter"

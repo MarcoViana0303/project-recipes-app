@@ -58,12 +58,12 @@ function Header() {
   } */
 
   return (
-    <div>
+    <div className='div-header'>
       <SearchBar />
       <a href="/profile">
         <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
       </a>
-      <div>
+      <div className='div-button-search'>
         {isRender && (
           <button type="button" onClick={ handleShowInput }>
             <img data-testid="search-top-btn" src={ searchIcon } alt="search" />

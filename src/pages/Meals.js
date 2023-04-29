@@ -6,7 +6,7 @@ import Recipes from '../components/Recipes';
 
 export default function Meals() {
   return (
-    <div>
+    <div className='div-meals'>
       <Header />
       <Recipes />
       <Footer />

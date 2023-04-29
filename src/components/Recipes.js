@@ -72,9 +72,9 @@ function Recipes() {
   }, [dataMeals]);
 
   return (
-    <div>
+    <div className='div-recipes'>
       {renderMeals ? (
-        <div>
+        <div className='div-recipes-style'>
           <Buttons categories={ buttonsList } type="meals" />
           {mealList.map((meal, i) => {
             if (i <= MAX_RENDER) {
@@ -93,7 +93,7 @@ function Recipes() {
           })}
         </div>
       ) : (
-        <div>
+        <div className='div-recipes-style'>
           <Buttons categories={ buttonsList } type="drinks" />
           {drinksList?.map((drink, i) => {
             if (i <= MAX_RENDER) {

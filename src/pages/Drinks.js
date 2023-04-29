@@ -6,7 +6,7 @@ import Recipes from '../components/Recipes';
 
 function Drinks() {
   return (
-    <div>
+    <div className='div-drinks'>
       <Header />
       <Recipes />
       <Footer />
