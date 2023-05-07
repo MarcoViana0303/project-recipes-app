@@ -109,7 +109,7 @@ border-radius: 10px;
 
 /* Tela de comidas */
 .div-meals {
-  background-image: url('./photos/kitchen.jpg');
+  background-image: url('./photos/wood.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -118,7 +118,7 @@ border-radius: 10px;
 
 /* Tela de drinks */
 .div-drinks {
-  background-image: url('./photos/drinks.jpg');
+  background-image: url('./photos/wood.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -186,9 +186,10 @@ border-radius: 10px;
 }
 
 /* Estilizando o header (lupa, botão, etc) */ 
-.search-recipes {
-  display: flex;
-  justify-content: center;
+.button-search {
+  margin-left: 400px;
+  position: absolute;
+
 }
 
 .search-recipes input[type="radio"] {
@@ -197,11 +198,12 @@ border-radius: 10px;
   border: 2px solid red;
   border-radius: 50%;
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .search-recipes button {
   margin: 0;
-  margin-left: 3%;
+  margin-left: 6%;
   background-color: #0fa36b;
   height: 50px;
   border-radius: 10px;
@@ -213,12 +215,20 @@ border-radius: 10px;
 
 .search-recipes label {
   font-size: 20px;
-  color: #001f3f;
+  color: white;
 }
 
-.div-button-search {
-  display: flex;
-  justify-content: center;
+.div-button-search input{
+  /* display: flex;
+  justify-content: center; */
+  position: absolute;
+  margin-left: 100px;
+
+}
+
+.title-meals {
+  position: absolute;
+  margin-left: 45%;
 }
 
 .div-button-search button {
@@ -229,12 +239,52 @@ border-radius: 10px;
 
 .div-header {
   display: flex;
-  justify-content: center;
-  margin-left: 20px;
+  justify-content: center;  
   color: white;
 }
 
 .div-header input{
   height: 45px;
   border-radius: 10px;
+}
+
+/* Estilizando a tela de detalhes da receita */
+
+.food-detail {
+
+}
+
+.div-detail {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.title-detail {
+  text-align: center;
+  font-size: 2em;
+  margin: 0;
+  padding: 1em;
+  background-color: #f9a826;
+  color: #fff;
+}
+
+.image-detail {
+  text-align: center;
+}
+
+ .image-detail img {
+  max-width: 100%;
+}
+
+.food-detail {
+  padding: 1em;
+  text-align: justify;
+} 
+
+.category-detail {
+  text-align: center;
 }

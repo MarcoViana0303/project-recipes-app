@@ -5,6 +5,7 @@ import '../recipedetails.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import YouTube from 'react-youtube';
 
 const MAX_RENDER = 5;
 const copy = require('clipboard-copy');
@@ -93,66 +94,32 @@ export default function MealDetail() {
   };
 
   return (
-    <div>
-      <h1 data-testid="recipe-title">{dataAPI?.strMeal}</h1>
-      <img
-        src={ `${dataAPI?.strMealThumb}` }
-        alt={ `${dataAPI?.strMeal}` }
-        data-testid="recipe-photo"
-        className="favoriteIMG"
-      />
-      <h2 data-testid="recipe-category">{dataAPI?.strCategory}</h2>
-      <p data-testid="instructions">{dataAPI?.strInstructions}</p>
-
+    <div className="div-detail">
+      <h1 data-testid="recipe-title" className="title-detail">{dataAPI?.strMeal}</h1>
+      <div className="image-detail">
+        <img
+          src={ `${dataAPI?.strMealThumb}` }
+          alt={ `${dataAPI?.strMeal}` }
+          data-testid="recipe-photo"
+          className="favoriteIMG"
+        />
+      </div>
+      <h2 data-testid="recipe-category" className="category-detail">{dataAPI?.strCategory}</h2>
+      <p data-testid="instructions" className="food-detail">{dataAPI?.strInstructions}</p>
       <ul>
-        <li data-testid="0-ingredient-name-and-measure">{dataAPI?.strIngredient1}</li>
-        <li data-testid="0-ingredient-name-and-measure">{dataAPI?.strMeasure1}</li>
-        <li data-testid="1-ingredient-name-and-measure">{dataAPI?.strIngredient2}</li>
-        <li data-testid="1-ingredient-name-and-measure">{dataAPI?.strMeasure2}</li>
-        <li data-testid="2-ingredient-name-and-measure">{dataAPI?.strIngredient3}</li>
-        <li data-testid="2-ingredient-name-and-measure">{dataAPI?.strMeasure3}</li>
-        <li data-testid="3-ingredient-name-and-measure">{dataAPI?.strIngredient4}</li>
-        <li data-testid="3-ingredient-name-and-measure">{dataAPI?.strMeasure4}</li>
-        <li data-testid="4-ingredient-name-and-measure">{dataAPI?.strIngredient5}</li>
-        <li data-testid="4-ingredient-name-and-measure">{dataAPI?.strMeasure5}</li>
-        <li data-testid="5-ingredient-name-and-measure">{dataAPI?.strIngredient6}</li>
-        <li data-testid="5-ingredient-name-and-measure">{dataAPI?.strMeasure6}</li>
-        <li data-testid="6-ingredient-name-and-measure">{dataAPI?.strIngredient7}</li>
-        <li data-testid="6-ingredient-name-and-measure">{dataAPI?.strMeasure7}</li>
-        <li data-testid="7-ingredient-name-and-measure">{dataAPI?.strIngredient8}</li>
-        <li data-testid="7-ingredient-name-and-measure">{dataAPI?.strMeasure8}</li>
-        <li data-testid="8-ingredient-name-and-measure">{dataAPI?.strIngredient9}</li>
-        <li data-testid="8-ingredient-name-and-measure">{dataAPI?.strMeasure9}</li>
-        <li data-testid="9-ingredient-name-and-measure">{dataAPI?.strIngredient10}</li>
-        <li data-testid="9-ingredient-name-and-measure">{dataAPI?.strMeasure10}</li>
-        <li data-testid="10-ingredient-name-and-measure">{dataAPI?.strIngredient11}</li>
-        <li data-testid="10-ingredient-name-and-measure">{dataAPI?.strMeasure11}</li>
-        <li data-testid="11-ingredient-name-and-measure">{dataAPI?.strIngredient12}</li>
-        <li data-testid="11-ingredient-name-and-measure">{dataAPI?.strMeasure12}</li>
-        <li data-testid="12-ingredient-name-and-measure">{dataAPI?.strIngredient13}</li>
-        <li data-testid="12-ingredient-name-and-measure">{dataAPI?.strMeasure13}</li>
-        <li data-testid="13-ingredient-name-and-measure">{dataAPI?.strIngredient14}</li>
-        <li data-testid="13-ingredient-name-and-measure">{dataAPI?.strMeasure14}</li>
-        <li data-testid="14-ingredient-name-and-measure">{dataAPI?.strIngredient15}</li>
-        <li data-testid="14-ingredient-name-and-measure">{dataAPI?.strMeasure15}</li>
-        <li data-testid="15-ingredient-name-and-measure">{dataAPI?.strIngredient16}</li>
-        <li data-testid="15-ingredient-name-and-measure">{dataAPI?.strMeasure16}</li>
-        <li data-testid="16-ingredient-name-and-measure">{dataAPI?.strIngredient17}</li>
-        <li data-testid="16-ingredient-name-and-measure">{dataAPI?.strMeasure17}</li>
-        <li data-testid="17-ingredient-name-and-measure">{dataAPI?.strIngredient18}</li>
-        <li data-testid="17-ingredient-name-and-measure">{dataAPI?.strMeasure18}</li>
-        <li data-testid="18-ingredient-name-and-measure">{dataAPI?.strIngredient19}</li>
-        <li data-testid="18-ingredient-name-and-measure">{dataAPI?.strMeasure19}</li>
-        <li data-testid="19-ingredient-name-and-measure">{dataAPI?.strIngredient20}</li>
-        <li data-testid="19-ingredient-name-and-measure">{dataAPI?.strMeasure20}</li>
+        {Object.entries(dataAPI)
+          .filter(([key, value]) => key.includes('Ingredient') && value)
+          .map(([key, value], index) => (
+            <li key={ key } data-testid={ `${index}-ingredient-name-and-measure` }>
+              {`${value}`}
+              {dataAPI[`strMeasure${key.slice(-1)}`] && ` - ${dataAPI[`strMeasure${key.slice(-1)}`]}`}
+            </li>
+          ))}
       </ul>
 
-      <iframe
+      <YouTube
         title={ `${dataAPI?.strMeal}` }
-        width="420"
-        height="315"
-        src={ `${dataAPI?.strYoutube}` }
-        data-testid="video"
+        videoId={ `${dataAPI?.strYoutube}` }
       />
 
       <div className="divScroll">

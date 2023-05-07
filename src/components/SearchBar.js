@@ -67,7 +67,7 @@ function SearchBar() {
   }, [searchInput]);
 
   return (
-    <form className='search-recipes'>
+    <form className="search-recipes">
       <div>
         <label htmlFor="ingrediente">
           <input
@@ -103,7 +103,7 @@ function SearchBar() {
           primeira letra
         </label>
       </div>
-      <button type="button" data-testid="exec-search-btn" onClick={ handleClick }>
+      <button type="button" data-testid="exec-search-btn" onClick={ handleClick } className="button-search">
         Pesquisar
       </button>
     </form>

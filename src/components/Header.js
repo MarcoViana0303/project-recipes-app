@@ -58,12 +58,13 @@ function Header() {
   } */
 
   return (
-    <div className='div-header'>
-      <SearchBar />
-      <a href="/profile">
+    <div className="div-header">
+
+      {/* Há umas inconstâncias neste funcionamento */}
+      {/* <a href="/profile">
         <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      </a>
-      <div className='div-button-search'>
+      </a> */}
+      <div className="div-button-search">
         {isRender && (
           <button type="button" onClick={ handleShowInput }>
             <img data-testid="search-top-btn" src={ searchIcon } alt="search" />
@@ -79,7 +80,9 @@ function Header() {
       )}
       {/* <img src={ searchIcon } alt="search" data-testid="search-top-btn" /> */}
 
-      <h1 data-testid="page-title">{title}</h1>
+      <h1 className="title-meals" data-testid="page-title">{title}</h1>
+
+      <SearchBar />
     </div>
   );
 }
