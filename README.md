@@ -50,9 +50,14 @@ Inicie o servidor
 
 ## Ilustração do projeto
 
-![Projeto Recipes App](./example.png)
+### Tela de Login
+![Projeto Recipes App](./tela-login-recipes-app.png)
+### Tela de Comidas
+![Projeto Recipes App](./tela-comidas-recipes-app.png)
+### Tela de Receitas
+![Projeto Recipes App](./tela-receitas-recipe-app.png)
 
-## Desenvolvedores que trabalharam comigo no projeto
+## Desenvolvedores que trabalharam ao meu lado no projeto
 
 - [@Eduardo-Balieiro](https://github.com/Eduardo-Balieiro)
 - [@Queonias G. Rocha](https://github.com/Queonias)
